@@ -1,8 +1,16 @@
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import catImage from "@/assets/cat.png";
 import flowerImage from "@/assets/flower.png";
+import OrganismViewer from "@/components/OrganismViewer";
 
 const Index = () => {
+  const [showViewer, setShowViewer] = useState(false);
+
+  if (showViewer) {
+    return <OrganismViewer onExit={() => setShowViewer(false)} />;
+  }
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* NEAL.FUN Logo */}
@@ -133,7 +141,10 @@ const Index = () => {
               </p>
 
               {/* Enter Button */}
-              <button className="enter-button group inline-flex items-center gap-3 px-8 py-3 border-2 border-foreground/80 rounded-full bg-transparent hover:bg-foreground hover:text-primary-foreground transition-all duration-300 text-lg font-medium">
+              <button 
+                onClick={() => setShowViewer(true)}
+                className="enter-button group inline-flex items-center gap-3 px-8 py-3 border-2 border-foreground/80 rounded-full bg-transparent hover:bg-foreground hover:text-primary-foreground transition-all duration-300 text-lg font-medium"
+              >
                 Enter
                 <ArrowRight className="arrow-icon w-5 h-5 transition-transform group-hover:translate-x-1" />
               </button>
