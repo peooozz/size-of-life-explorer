@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,42 +6,42 @@
 
 @layer base {
   :root {
-    --background: 40 33% 94%;
-    --foreground: 30 10% 15%;
+    --background: 220 20% 97%;
+    --foreground: 220 25% 10%;
 
-    --card: 40 30% 96%;
-    --card-foreground: 30 10% 15%;
+    --card: 220 15% 95%;
+    --card-foreground: 220 25% 10%;
 
-    --popover: 40 30% 96%;
-    --popover-foreground: 30 10% 15%;
+    --popover: 220 15% 95%;
+    --popover-foreground: 220 25% 10%;
 
-    --primary: 30 10% 15%;
-    --primary-foreground: 40 33% 94%;
+    --primary: 220 70% 45%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 35 25% 88%;
-    --secondary-foreground: 30 10% 15%;
+    --secondary: 220 15% 90%;
+    --secondary-foreground: 220 25% 10%;
 
-    --muted: 35 20% 90%;
-    --muted-foreground: 30 10% 40%;
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 15 60% 50%;
-    --accent-foreground: 40 33% 94%;
+    --accent: 340 75% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 15% 70%;
-    --input: 30 15% 70%;
-    --ring: 30 10% 15%;
+    --border: 220 15% 85%;
+    --input: 220 15% 85%;
+    --ring: 220 70% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    /* Custom colors for Size of Life */
-    --cream: 40 33% 94%;
-    --cream-light: 40 30% 96%;
-    --warm-brown: 30 10% 15%;
-    --terracotta: 15 60% 50%;
-    --terracotta-light: 15 50% 65%;
+    /* Custom theme colors */
+    --cosmic-blue: 220 70% 45%;
+    --cosmic-purple: 270 60% 50%;
+    --cosmic-pink: 340 75% 55%;
+    --cosmic-teal: 180 60% 45%;
+    --soft-cream: 40 30% 96%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -54,34 +54,34 @@
   }
 
   .dark {
-    --background: 30 10% 10%;
-    --foreground: 40 33% 94%;
+    --background: 220 25% 8%;
+    --foreground: 220 10% 95%;
 
-    --card: 30 10% 12%;
-    --card-foreground: 40 33% 94%;
+    --card: 220 25% 12%;
+    --card-foreground: 220 10% 95%;
 
-    --popover: 30 10% 12%;
-    --popover-foreground: 40 33% 94%;
+    --popover: 220 25% 12%;
+    --popover-foreground: 220 10% 95%;
 
-    --primary: 40 33% 94%;
-    --primary-foreground: 30 10% 10%;
+    --primary: 220 70% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 15% 20%;
-    --secondary-foreground: 40 33% 94%;
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 220 10% 95%;
 
-    --muted: 30 15% 20%;
-    --muted-foreground: 40 20% 60%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 10% 60%;
 
-    --accent: 15 60% 50%;
-    --accent-foreground: 40 33% 94%;
+    --accent: 340 75% 55%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 15% 25%;
-    --input: 30 15% 25%;
-    --ring: 40 33% 94%;
-    
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 220 70% 55%;
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,42 +100,77 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Space Grotesk', sans-serif;
   }
 }
 
-/* Decorative wavy line */
-.wavy-line {
-  height: 12px;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 4px,
-    hsl(var(--terracotta-light)) 4px,
-    hsl(var(--terracotta-light)) 8px
+/* Gradient backgrounds */
+.gradient-cosmic {
+  background: linear-gradient(135deg, 
+    hsl(var(--cosmic-blue)) 0%, 
+    hsl(var(--cosmic-purple)) 50%,
+    hsl(var(--cosmic-pink)) 100%
   );
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12'%3E%3Cpath d='M0 6 Q 12.5 0, 25 6 T 50 6 T 75 6 T 100 6' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E");
-  mask-repeat: repeat-x;
-  mask-size: 50px 12px;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 12'%3E%3Cpath d='M0 6 Q 12.5 0, 25 6 T 50 6 T 75 6 T 100 6' stroke='black' stroke-width='2' fill='none'/%3E%3C/svg%3E");
-  -webkit-mask-repeat: repeat-x;
-  -webkit-mask-size: 50px 12px;
 }
 
-/* Enter button animation */
-@keyframes arrow-bounce {
+/* Glow effects */
+.glow-blue {
+  box-shadow: 0 0 40px hsl(var(--cosmic-blue) / 0.3),
+              0 0 80px hsl(var(--cosmic-blue) / 0.15);
+}
+
+.glow-pink {
+  box-shadow: 0 0 40px hsl(var(--cosmic-pink) / 0.3),
+              0 0 80px hsl(var(--cosmic-pink) / 0.15);
+}
+
+/* Animated gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, 
+    hsl(var(--cosmic-blue)) 0%, 
+    hsl(var(--cosmic-purple)) 50%,
+    hsl(var(--cosmic-pink)) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pulse animation for microscopic objects */
+@keyframes pulse-glow {
   0%, 100% {
-    transform: translateX(0);
+    opacity: 1;
+    transform: scale(1);
   }
   50% {
-    transform: translateX(4px);
+    opacity: 0.8;
+    transform: scale(1.05);
   }
 }
 
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Enter button hover */
 .enter-button:hover .arrow-icon {
-  animation: arrow-bounce 0.6s ease-in-out infinite;
+  transform: translateX(4px);
 }
