@@ -1,143 +1,88 @@
-import { useState, useEffect } from "react";
-import ScaleExplorer from "@/components/ScaleExplorer";
-import Starfield from "@/components/Starfield";
+import { useState } from "react";
+import { ArrowRight, Sparkles } from "lucide-react";
+import OrganismViewer from "@/components/OrganismViewer";
 
 const Index = () => {
-  const [showExplorer, setShowExplorer] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
+  const [showViewer, setShowViewer] = useState(false);
 
-  // Detect first scroll or click to start
-  useEffect(() => {
-    if (showExplorer) return;
-
-    const handleInteraction = () => {
-      setShowIntro(false);
-      setTimeout(() => setShowExplorer(true), 800);
-    };
-
-    // Auto-fade after 5 seconds
-    const autoTimer = setTimeout(() => {
-      if (!showExplorer) {
-        handleInteraction();
-      }
-    }, 10000);
-
-    window.addEventListener("wheel", handleInteraction, { once: true });
-    window.addEventListener("touchstart", handleInteraction, { once: true });
-
-    return () => {
-      clearTimeout(autoTimer);
-      window.removeEventListener("wheel", handleInteraction);
-      window.removeEventListener("touchstart", handleInteraction);
-    };
-  }, [showExplorer]);
-
-  if (showExplorer) {
-    return <ScaleExplorer onExit={() => {
-      setShowExplorer(false);
-      setShowIntro(true);
-    }} />;
+  if (showViewer) {
+    return <OrganismViewer onExit={() => setShowViewer(false)} />;
   }
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Starfield background */}
-      <Starfield />
-
-      {/* Nebula effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full opacity-30 blur-3xl"
-          style={{
-            background: "radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full opacity-20 blur-3xl"
-          style={{
-            background: "radial-gradient(circle, rgba(0, 212, 255, 0.4) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full opacity-10 blur-3xl"
-          style={{
-            background: "radial-gradient(ellipse, rgba(59, 130, 246, 0.5) 0%, transparent 70%)",
-          }}
-        />
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-primary/10 rounded-full blur-2xl -translate-x-1/2 -translate-y-1/2" />
       </div>
 
+      {/* Grid pattern overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `
+            linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
+          `,
+          backgroundSize: '50px 50px'
+        }}
+      />
+
       {/* Main Content */}
-      <div
-        className={`flex items-center justify-center min-h-screen px-4 py-16 relative z-10 transition-all duration-1000 ${
-          showIntro ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <div className="text-center max-w-3xl mx-auto">
+      <div className="flex items-center justify-center min-h-screen px-4 py-16 relative z-10">
+        <div className="text-center max-w-2xl mx-auto">
+          {/* Icon */}
+          <div className="flex justify-center mb-8">
+            <div className="p-4 rounded-2xl bg-primary/10 border border-primary/20">
+              <Sparkles className="w-8 h-8 text-primary" />
+            </div>
+          </div>
+
           {/* Title */}
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-tight">
-            <span
-              className="block bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(135deg, #ffffff 0%, #a855f7 50%, #00d4ff 100%)",
-              }}
-            >
-              Size of Life
-            </span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight">
+            <span className="text-gradient">Scale of</span>
+            <br />
+            <span className="text-foreground">Everything</span>
           </h1>
 
           {/* Subtitle */}
-          <p className="text-lg md:text-xl text-white/60 mb-16 max-w-xl mx-auto leading-relaxed">
-            Explore the scale of everything — from the observable universe to the Planck length
+          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-lg mx-auto leading-relaxed">
+            Journey from the smallest theoretical particles to the largest creatures that ever lived.
           </p>
 
-          {/* Animated pulse ring */}
-          <div className="relative inline-block">
-            <div
-              className="absolute inset-0 rounded-full animate-ping opacity-20"
-              style={{ background: "rgba(0, 212, 255, 0.5)" }}
-            />
-            <button
-              onClick={() => {
-                setShowIntro(false);
-                setTimeout(() => setShowExplorer(true), 800);
-              }}
-              className="relative px-10 py-4 rounded-full font-medium text-lg transition-all duration-300 hover:scale-105 border"
-              style={{
-                background: "rgba(0, 212, 255, 0.1)",
-                borderColor: "rgba(0, 212, 255, 0.3)",
-                color: "#00d4ff",
-                boxShadow: "0 0 30px rgba(0, 212, 255, 0.2), inset 0 0 30px rgba(0, 212, 255, 0.05)",
-              }}
-            >
-              Begin Journey
-            </button>
-          </div>
+          {/* Enter Button */}
+          <button 
+            onClick={() => setShowViewer(true)}
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all duration-300 text-lg font-medium shadow-lg hover:shadow-xl hover:shadow-primary/25"
+          >
+            Begin Journey
+            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          </button>
 
-          {/* Scroll hint */}
-          <div className="mt-16 flex flex-col items-center gap-2 animate-bounce">
-            <span className="text-white/40 text-sm">Scroll to Begin</span>
-            <svg
-              className="w-6 h-6 text-white/40"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </div>
+          {/* Hint */}
+          <p className="mt-8 text-sm text-muted-foreground">
+            Use scroll or arrow keys to navigate
+          </p>
         </div>
       </div>
 
-      {/* Decorative corner elements */}
-      <div className="absolute top-8 left-8 w-20 h-20 border-l-2 border-t-2 border-white/10 rounded-tl-lg" />
-      <div className="absolute top-8 right-8 w-20 h-20 border-r-2 border-t-2 border-white/10 rounded-tr-lg" />
-      <div className="absolute bottom-8 left-8 w-20 h-20 border-l-2 border-b-2 border-white/10 rounded-bl-lg" />
-      <div className="absolute bottom-8 right-8 w-20 h-20 border-r-2 border-b-2 border-white/10 rounded-br-lg" />
+      {/* Floating particles decoration */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(6)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-primary/30 animate-float"
+            style={{
+              left: `${15 + i * 15}%`,
+              top: `${20 + (i % 3) * 25}%`,
+              animationDelay: `${i * 0.5}s`,
+              animationDuration: `${3 + i * 0.5}s`
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 };
