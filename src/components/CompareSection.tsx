@@ -24,7 +24,7 @@ const CompareSection = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Selection */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-2">
           <Select
             onValueChange={(value) => {
               const org = organisms.find((o) => o.id === value);
@@ -34,7 +34,7 @@ const CompareSection = () => {
             <SelectTrigger className="w-full max-w-xs bg-card border-border">
               <SelectValue placeholder="Select first item" />
             </SelectTrigger>
-            <SelectContent className="max-h-[150px]">
+            <SelectContent className="max-h-[300px]">
               {organisms.map((org) => (
                 <SelectItem key={org.id} value={org.id}>
                   {org.name} ({org.sizeLabel})
