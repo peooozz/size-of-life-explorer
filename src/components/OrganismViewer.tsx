@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { ChevronUp, ChevronDown, X, Home } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { organisms, Organism } from "@/data/organisms";
 import { cn } from "@/lib/utils";
 
@@ -10,38 +10,38 @@ interface OrganismViewerProps {
 const OrganismViewer = ({ onExit }: OrganismViewerProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [direction, setDirection] = useState<"up" | "down" | null>(null);
+  const [direction, setDirection] = useState<"left" | "right" | null>(null);
 
   const currentOrganism = organisms[currentIndex];
 
   const goToNext = useCallback(() => {
     if (currentIndex < organisms.length - 1 && !isTransitioning) {
-      setDirection("down");
+      setDirection("right");
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrentIndex((prev) => prev + 1);
         setIsTransitioning(false);
         setDirection(null);
-      }, 400);
+      }, 300);
     }
   }, [currentIndex, isTransitioning]);
 
   const goToPrev = useCallback(() => {
     if (currentIndex > 0 && !isTransitioning) {
-      setDirection("up");
+      setDirection("left");
       setIsTransitioning(true);
       setTimeout(() => {
         setCurrentIndex((prev) => prev - 1);
         setIsTransitioning(false);
         setDirection(null);
-      }, 400);
+      }, 300);
     }
   }, [currentIndex, isTransitioning]);
 
   // Handle scroll
   useEffect(() => {
     let lastScrollTime = 0;
-    const scrollThreshold = 600;
+    const scrollThreshold = 400;
 
     const handleWheel = (e: WheelEvent) => {
       e.preventDefault();
@@ -49,7 +49,7 @@ const OrganismViewer = ({ onExit }: OrganismViewerProps) => {
       if (now - lastScrollTime < scrollThreshold) return;
       lastScrollTime = now;
 
-      if (e.deltaY > 0) {
+      if (e.deltaY > 0 || e.deltaX > 0) {
         goToNext();
       } else {
         goToPrev();
@@ -63,10 +63,10 @@ const OrganismViewer = ({ onExit }: OrganismViewerProps) => {
   // Handle keyboard
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowDown" || e.key === " ") {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === " ") {
         e.preventDefault();
         goToNext();
-      } else if (e.key === "ArrowUp") {
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
         e.preventDefault();
         goToPrev();
       } else if (e.key === "Escape") {
@@ -78,169 +78,132 @@ const OrganismViewer = ({ onExit }: OrganismViewerProps) => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [goToNext, goToPrev, onExit]);
 
-  const getOrganismDisplay = (organism: Organism) => {
-    return (
-      <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 animate-float">
-        <img 
-          src={organism.image} 
-          alt={organism.name}
-          className="w-full h-full object-contain rounded-2xl shadow-2xl"
-        />
-      </div>
-    );
-  };
-
   return (
     <div className="fixed inset-0 bg-background overflow-hidden">
-      {/* Ambient background */}
-      <div 
-        className="absolute inset-0 transition-colors duration-1000"
-        style={{
-          background: `radial-gradient(circle at 50% 50%, ${currentOrganism.color}15 0%, transparent 70%)`
-        }}
-      />
+      {/* Border frame */}
+      <div className="absolute inset-4 md:inset-8 border border-foreground/20 pointer-events-none z-50" />
 
-      {/* Header */}
-      <header className="absolute top-0 left-0 right-0 z-50 p-4 flex justify-between items-center">
-        <button
-          onClick={onExit}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-secondary hover:bg-secondary/80 transition-colors text-sm font-medium"
-        >
-          <Home className="w-4 h-4" />
-          Home
-        </button>
-        
-        <div className="text-center">
-          <span className="text-sm text-muted-foreground font-mono">
-            {currentIndex + 1} / {organisms.length}
-          </span>
-        </div>
+      {/* Exit button */}
+      <button
+        onClick={onExit}
+        className="absolute top-6 right-6 md:top-10 md:right-10 z-50 p-2 rounded-full hover:bg-foreground/10 transition-colors"
+        aria-label="Close"
+      >
+        <X className="w-6 h-6 text-foreground/60" />
+      </button>
 
-        <button
-          onClick={onExit}
-          className="p-2 rounded-full hover:bg-secondary transition-colors"
-          aria-label="Close"
-        >
-          <X className="w-5 h-5" />
-        </button>
-      </header>
-
-      {/* Progress bar */}
-      <div className="absolute left-4 top-1/2 -translate-y-1/2 z-50 hidden md:block">
-        <div className="flex flex-col gap-1.5">
-          {organisms.map((org, index) => (
-            <button
-              key={org.id}
-              onClick={() => {
-                if (!isTransitioning && index !== currentIndex) {
-                  setIsTransitioning(true);
-                  setDirection(index > currentIndex ? "down" : "up");
-                  setTimeout(() => {
-                    setCurrentIndex(index);
-                    setIsTransitioning(false);
-                    setDirection(null);
-                  }, 300);
-                }
-              }}
-              className={cn(
-                "w-2 h-2 rounded-full transition-all duration-300",
-                index === currentIndex
-                  ? "scale-150"
-                  : "bg-foreground/20 hover:bg-foreground/40"
-              )}
-              style={{
-                backgroundColor: index === currentIndex ? currentOrganism.color : undefined
-              }}
-              aria-label={`Go to ${org.name}`}
-            />
-          ))}
-        </div>
+      {/* Progress indicator */}
+      <div className="absolute top-6 left-1/2 -translate-x-1/2 z-50">
+        <span className="text-sm text-muted-foreground font-medium">
+          {currentIndex + 1} / {organisms.length}
+        </span>
       </div>
 
       {/* Navigation arrows */}
-      <div className="absolute right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
-        <button
-          onClick={goToPrev}
-          disabled={currentIndex === 0 || isTransitioning}
-          className={cn(
-            "p-3 rounded-full bg-secondary transition-all duration-200",
-            currentIndex === 0
-              ? "opacity-30 cursor-not-allowed"
-              : "hover:bg-secondary/80 hover:scale-110"
-          )}
-          aria-label="Previous organism"
-        >
-          <ChevronUp className="w-5 h-5" />
-        </button>
-        <button
-          onClick={goToNext}
-          disabled={currentIndex === organisms.length - 1 || isTransitioning}
-          className={cn(
-            "p-3 rounded-full bg-secondary transition-all duration-200",
-            currentIndex === organisms.length - 1
-              ? "opacity-30 cursor-not-allowed"
-              : "hover:bg-secondary/80 hover:scale-110"
-          )}
-          aria-label="Next organism"
-        >
-          <ChevronDown className="w-5 h-5" />
-        </button>
-      </div>
+      <button
+        onClick={goToPrev}
+        disabled={currentIndex === 0 || isTransitioning}
+        className={cn(
+          "absolute left-6 md:left-10 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full border border-foreground/20 transition-all duration-200",
+          currentIndex === 0
+            ? "opacity-30 cursor-not-allowed"
+            : "hover:bg-foreground/5 hover:border-foreground/40"
+        )}
+        aria-label="Previous organism"
+      >
+        <ChevronLeft className="w-6 h-6 text-foreground/70" />
+      </button>
+      
+      <button
+        onClick={goToNext}
+        disabled={currentIndex === organisms.length - 1 || isTransitioning}
+        className={cn(
+          "absolute right-6 md:right-10 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full border border-foreground/20 transition-all duration-200",
+          currentIndex === organisms.length - 1
+            ? "opacity-30 cursor-not-allowed"
+            : "hover:bg-foreground/5 hover:border-foreground/40"
+        )}
+        aria-label="Next organism"
+      >
+        <ChevronRight className="w-6 h-6 text-foreground/70" />
+      </button>
 
       {/* Main content */}
       <div
         className={cn(
-          "h-full flex flex-col items-center justify-center transition-all duration-500",
-          isTransitioning && direction === "down" && "opacity-0 -translate-y-20",
-          isTransitioning && direction === "up" && "opacity-0 translate-y-20"
+          "h-full flex flex-col items-center justify-center transition-all duration-300",
+          isTransitioning && direction === "right" && "opacity-0 -translate-x-8",
+          isTransitioning && direction === "left" && "opacity-0 translate-x-8"
         )}
       >
-        {/* Category badge */}
-        <div className="absolute top-24 left-1/2 -translate-x-1/2 text-center">
-          <div
-            className="inline-block px-4 py-1.5 rounded-full text-sm font-medium"
-            style={{ backgroundColor: `${currentOrganism.color}20`, color: currentOrganism.color }}
-          >
-            {currentOrganism.category}
-          </div>
-        </div>
-
-        {/* Organism display */}
-        <div className="flex flex-col items-center justify-center flex-1 pt-16">
+        {/* Organism image */}
+        <div className="flex-1 flex items-center justify-center pt-20 pb-32">
           <div className="relative">
-            {getOrganismDisplay(currentOrganism)}
-            
-            {/* Size indicator */}
-            <div className="absolute -right-24 md:-right-32 top-1/2 -translate-y-1/2 flex items-center gap-3">
-              <div className="w-12 md:w-20 h-px bg-foreground/30" />
-              <span className="text-sm md:text-base font-mono text-muted-foreground whitespace-nowrap">
-                {currentOrganism.sizeLabel}
-              </span>
-            </div>
+            <img 
+              src={currentOrganism.image} 
+              alt={currentOrganism.name}
+              className="max-w-[280px] max-h-[280px] md:max-w-[360px] md:max-h-[360px] lg:max-w-[420px] lg:max-h-[420px] object-contain sticker-shadow"
+            />
           </div>
         </div>
 
-        {/* Info card */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 text-center max-w-md px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">{currentOrganism.name}</h2>
+        {/* Info section - bottom */}
+        <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 text-center max-w-lg px-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-2 text-foreground">
+            {currentOrganism.name}
+          </h2>
+          
           {currentOrganism.scientificName && (
-            <p className="text-muted-foreground italic mb-3 text-sm">{currentOrganism.scientificName}</p>
+            <p className="text-muted-foreground italic mb-3 text-base">
+              {currentOrganism.scientificName}
+            </p>
           )}
-          <p className="text-foreground/80 leading-relaxed">{currentOrganism.description}</p>
-        </div>
 
-        {/* Scroll hint */}
-        {currentIndex === 0 && (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce">
-            <span className="text-xs text-muted-foreground">Scroll to explore</span>
-            <ChevronDown className="w-4 h-4 text-muted-foreground" />
+          {/* Size indicator */}
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <div className="h-px w-12 bg-foreground/20" />
+            <span className="text-sm font-medium text-foreground/70">
+              {currentOrganism.sizeLabel}
+            </span>
+            <div className="h-px w-12 bg-foreground/20" />
           </div>
-        )}
+
+          <p className="text-foreground/70 leading-relaxed text-sm md:text-base">
+            {currentOrganism.description}
+          </p>
+        </div>
       </div>
 
-      {/* Scale reference */}
-      <div className="absolute bottom-4 left-4 text-xs text-muted-foreground hidden md:block">
-        <p>↑↓ or scroll to navigate • ESC to exit</p>
+      {/* Bottom progress dots */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex gap-1.5">
+        {organisms.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              if (!isTransitioning && index !== currentIndex) {
+                setDirection(index > currentIndex ? "right" : "left");
+                setIsTransitioning(true);
+                setTimeout(() => {
+                  setCurrentIndex(index);
+                  setIsTransitioning(false);
+                  setDirection(null);
+                }, 300);
+              }
+            }}
+            className={cn(
+              "w-2 h-2 rounded-full transition-all duration-300",
+              index === currentIndex
+                ? "bg-foreground/60 scale-125"
+                : "bg-foreground/20 hover:bg-foreground/40"
+            )}
+            aria-label={`Go to ${organisms[index].name}`}
+          />
+        ))}
+      </div>
+
+      {/* Keyboard hint */}
+      <div className="absolute bottom-6 left-6 md:left-10 text-xs text-muted-foreground hidden md:block">
+        ← → or scroll to navigate • ESC to exit
       </div>
     </div>
   );
