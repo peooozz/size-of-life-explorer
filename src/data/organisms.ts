@@ -1,4 +1,5 @@
 // Import all organism images
+import planckImg from "@/assets/organisms/planck.png";
 import stringImg from "@/assets/organisms/string.png";
 import quarkImg from "@/assets/organisms/quark.png";
 import protonImg from "@/assets/organisms/proton.png";
@@ -23,6 +24,10 @@ import whaleSharkImg from "@/assets/organisms/whale-shark.png";
 import trexImg from "@/assets/organisms/trex.png";
 import blueWhaleImg from "@/assets/organisms/blue-whale.png";
 import sequoiaImg from "@/assets/organisms/sequoia.png";
+import earthImg from "@/assets/organisms/earth.png";
+import sunImg from "@/assets/organisms/sun.png";
+import galaxyImg from "@/assets/organisms/galaxy.png";
+import universeImg from "@/assets/organisms/universe.png";
 
 export interface Organism {
   id: string;
@@ -37,6 +42,17 @@ export interface Organism {
 }
 
 export const organisms: Organism[] = [
+  {
+    id: "planck",
+    name: "Planck Length",
+    scientificName: "Smallest measurable length",
+    size: 1.616e-35,
+    sizeLabel: "1.6 × 10⁻³⁵ m",
+    category: "Quantum",
+    color: "#a855f7",
+    description: "The smallest meaningful length in physics — nothing can be smaller",
+    image: planckImg,
+  },
   {
     id: "string",
     name: "String",
@@ -298,5 +314,49 @@ export const organisms: Organism[] = [
     color: "#166534",
     description: "Among the tallest and most massive trees on Earth",
     image: sequoiaImg,
+  },
+  {
+    id: "earth",
+    name: "Earth",
+    scientificName: "Terra",
+    size: 1.27e7,
+    sizeLabel: "12,742 km",
+    category: "Planet",
+    color: "#3b82f6",
+    description: "Our home planet, the only known world with life",
+    image: earthImg,
+  },
+  {
+    id: "sun",
+    name: "The Sun",
+    scientificName: "Sol",
+    size: 1.39e9,
+    sizeLabel: "1.39 million km",
+    category: "Star",
+    color: "#f59e0b",
+    description: "The star at the center of our solar system",
+    image: sunImg,
+  },
+  {
+    id: "milky-way",
+    name: "Milky Way",
+    scientificName: "Our Galaxy",
+    size: 9.5e20,
+    sizeLabel: "100,000 light years",
+    category: "Galaxy",
+    color: "#8b5cf6",
+    description: "Our home galaxy containing 100-400 billion stars",
+    image: galaxyImg,
+  },
+  {
+    id: "observable-universe",
+    name: "Observable Universe",
+    scientificName: "The Cosmos",
+    size: 8.8e26,
+    sizeLabel: "93 billion light years",
+    category: "Universe",
+    color: "#6366f1",
+    description: "Everything we can possibly observe — the ultimate scale",
+    image: universeImg,
   },
 ];

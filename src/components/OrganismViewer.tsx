@@ -128,54 +128,59 @@ const OrganismViewer = ({ onExit }: OrganismViewerProps) => {
         <ChevronRight className="w-6 h-6 text-foreground/70" />
       </button>
 
-      {/* Main content */}
-      <div
-        className={cn(
-          "h-full flex flex-col items-center justify-center transition-all duration-300",
-          isTransitioning && direction === "right" && "opacity-0 -translate-x-8",
-          isTransitioning && direction === "left" && "opacity-0 translate-x-8"
-        )}
-      >
-        {/* Organism image */}
-        <div className="flex-1 flex items-center justify-center pt-20 pb-32">
-          <div className="relative">
-            <img 
-              src={currentOrganism.image} 
-              alt={currentOrganism.name}
-              className="max-w-[280px] max-h-[280px] md:max-w-[360px] md:max-h-[360px] lg:max-w-[420px] lg:max-h-[420px] object-contain sticker-shadow"
-            />
-          </div>
+      {/* Main content - Fixed layout to prevent overlap */}
+      <div className="h-full flex flex-col pt-16 pb-20">
+        {/* Image container - takes up most space */}
+        <div 
+          className={cn(
+            "flex-1 flex items-center justify-center px-20 transition-all duration-300",
+            isTransitioning && direction === "right" && "opacity-0 -translate-x-8",
+            isTransitioning && direction === "left" && "opacity-0 translate-x-8"
+          )}
+        >
+          <img 
+            src={currentOrganism.image} 
+            alt={currentOrganism.name}
+            className="max-w-[320px] max-h-[320px] md:max-w-[400px] md:max-h-[400px] lg:max-w-[480px] lg:max-h-[480px] object-contain"
+          />
         </div>
 
-        {/* Info section - bottom */}
-        <div className="absolute bottom-16 md:bottom-20 left-1/2 -translate-x-1/2 text-center max-w-lg px-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-2 text-foreground">
-            {currentOrganism.name}
-          </h2>
-          
-          {currentOrganism.scientificName && (
-            <p className="text-muted-foreground italic mb-3 text-base">
-              {currentOrganism.scientificName}
-            </p>
+        {/* Info section - fixed at bottom, separate from image */}
+        <div 
+          className={cn(
+            "flex-shrink-0 px-6 pb-4 transition-all duration-300",
+            isTransitioning && "opacity-0"
           )}
+        >
+          <div className="text-center max-w-lg mx-auto">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-1 text-foreground">
+              {currentOrganism.name}
+            </h2>
+            
+            {currentOrganism.scientificName && (
+              <p className="text-muted-foreground italic mb-3 text-base">
+                {currentOrganism.scientificName}
+              </p>
+            )}
 
-          {/* Size indicator */}
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <div className="h-px w-12 bg-foreground/20" />
-            <span className="text-sm font-medium text-foreground/70">
-              {currentOrganism.sizeLabel}
-            </span>
-            <div className="h-px w-12 bg-foreground/20" />
+            {/* Size indicator */}
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <div className="h-px w-12 bg-foreground/20" />
+              <span className="text-sm font-medium text-foreground/70">
+                {currentOrganism.sizeLabel}
+              </span>
+              <div className="h-px w-12 bg-foreground/20" />
+            </div>
+
+            <p className="text-foreground/70 leading-relaxed text-sm md:text-base">
+              {currentOrganism.description}
+            </p>
           </div>
-
-          <p className="text-foreground/70 leading-relaxed text-sm md:text-base">
-            {currentOrganism.description}
-          </p>
         </div>
       </div>
 
       {/* Bottom progress dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex gap-1.5">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex gap-1">
         {organisms.map((_, index) => (
           <button
             key={index}
@@ -191,7 +196,7 @@ const OrganismViewer = ({ onExit }: OrganismViewerProps) => {
               }
             }}
             className={cn(
-              "w-2 h-2 rounded-full transition-all duration-300",
+              "w-1.5 h-1.5 rounded-full transition-all duration-300",
               index === currentIndex
                 ? "bg-foreground/60 scale-125"
                 : "bg-foreground/20 hover:bg-foreground/40"
