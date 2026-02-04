@@ -24,38 +24,20 @@ const Index = () => {
       {/* Decorative stickers */}
       {/* Top left - Hummingbird */}
       <div className="absolute top-12 left-12 md:top-20 md:left-24 lg:top-24 lg:left-32 z-10">
-        <img 
-          src={hummingbirdImg} 
-          alt="Hummingbird" 
+        <img
+          src={hummingbirdImg}
+          alt="Hummingbird"
           className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain sticker-shadow animate-float"
-          style={{ animationDelay: '0s' }}
+          style={{ animationDelay: "0s" }}
         />
       </div>
 
       {/* Top right - Sequoia/Vines */}
       <div className="absolute -top-4 -right-4 md:top-0 md:right-0 z-10">
-        <img 
-          src={sequoiaImg} 
-          alt="Tree" 
+        <img
+          src={sequoiaImg}
+          alt="Tree"
           className="w-32 h-48 md:w-40 md:h-56 lg:w-48 lg:h-64 object-contain sticker-shadow opacity-90"
-        />
-      </div>
-
-      {/* Bottom left - Ladybug */}
-      <div className="absolute bottom-16 -left-8 md:bottom-20 md:left-0 z-10">
-        <img 
-          src={ladybugImg} 
-          alt="Ladybug" 
-          className="w-28 h-28 md:w-36 md:h-36 lg:w-44 lg:h-44 object-contain sticker-shadow"
-        />
-      </div>
-
-      {/* Bottom right - Cat */}
-      <div className="absolute bottom-8 right-8 md:bottom-12 md:right-16 lg:bottom-16 lg:right-24 z-10">
-        <img 
-          src={catImg} 
-          alt="Cat" 
-          className="w-32 h-32 md:w-40 md:h-40 lg:w-52 lg:h-52 object-contain sticker-shadow"
         />
       </div>
 
@@ -71,23 +53,18 @@ const Index = () => {
 
             {/* Decorative DNA divider */}
             <div className="flex justify-center mb-6">
-              <svg 
-                width="180" 
-                height="24" 
-                viewBox="0 0 180 24" 
-                className="text-primary"
-              >
-                <path 
-                  d="M0 12 Q22.5 2 45 12 T90 12 T135 12 T180 12" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
+              <svg width="180" height="24" viewBox="0 0 180 24" className="text-primary">
+                <path
+                  d="M0 12 Q22.5 2 45 12 T90 12 T135 12 T180 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
                   fill="none"
                   opacity="0.7"
                 />
-                <path 
-                  d="M0 12 Q22.5 22 45 12 T90 12 T135 12 T180 12" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
+                <path
+                  d="M0 12 Q22.5 22 45 12 T90 12 T135 12 T180 12"
+                  stroke="currentColor"
+                  strokeWidth="2"
                   fill="none"
                   opacity="0.7"
                 />
@@ -100,12 +77,10 @@ const Index = () => {
             </div>
 
             {/* Subtitle */}
-            <p className="text-muted-foreground mb-8 text-lg">
-              From the Planck length to the Observable Universe
-            </p>
+            <p className="text-muted-foreground mb-8 text-lg">From the Planck length to the Observable Universe</p>
 
             {/* Enter Button */}
-            <button 
+            <button
               onClick={() => setShowViewer(true)}
               className="group inline-flex items-center gap-3 px-8 py-3 border-2 border-foreground/30 rounded-full hover:border-foreground/50 hover:bg-foreground/5 transition-all duration-300 text-lg font-medium text-foreground hover-lift"
             >
