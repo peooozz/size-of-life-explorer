@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { organisms, Organism } from "@/data/organisms";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const CompareSection = () => {
   const [leftOrganism, setLeftOrganism] = useState<Organism | null>(null);
@@ -14,22 +8,20 @@ const CompareSection = () => {
 
   const getComparison = () => {
     if (!leftOrganism || !rightOrganism) return null;
-    
+
     const ratio = leftOrganism.size / rightOrganism.size;
     if (ratio > 1) {
       return `${leftOrganism.name} is ${ratio.toExponential(2)}× larger than ${rightOrganism.name}`;
     } else if (ratio < 1) {
-      return `${leftOrganism.name} is ${(1/ratio).toExponential(2)}× smaller than ${rightOrganism.name}`;
+      return `${leftOrganism.name} is ${(1 / ratio).toExponential(2)}× smaller than ${rightOrganism.name}`;
     }
     return `${leftOrganism.name} and ${rightOrganism.name} are the same size`;
   };
 
   return (
     <div className="w-full max-w-4xl mx-auto p-6">
-      <h2 className="text-3xl md:text-4xl font-medium text-center mb-8 text-foreground">
-        Compare Sizes
-      </h2>
-      
+      <h2 className="text-3xl md:text-4xl font-medium text-center mb-8 text-foreground">Compare Sizes</h2>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Left Selection */}
         <div className="flex flex-col items-center gap-4">
@@ -50,10 +42,10 @@ const CompareSection = () => {
               ))}
             </SelectContent>
           </Select>
-          
+
           {leftOrganism && (
             <div className="flex flex-col items-center gap-3 animate-fade-in">
-              <div className="w-40 h-40 md:w-52 md:h-52 flex items-center justify-center">
+              <div className="w-40 h-40 md:w-30 md:h-52 flex items-center justify-center">
                 <img
                   src={leftOrganism.image}
                   alt={leftOrganism.name}
@@ -87,7 +79,7 @@ const CompareSection = () => {
               ))}
             </SelectContent>
           </Select>
-          
+
           {rightOrganism && (
             <div className="flex flex-col items-center gap-3 animate-fade-in">
               <div className="w-40 h-40 md:w-52 md:h-52 flex items-center justify-center">
@@ -110,9 +102,7 @@ const CompareSection = () => {
       {leftOrganism && rightOrganism && (
         <div className="mt-8 text-center animate-fade-in">
           <div className="inline-block px-6 py-4 bg-card rounded-xl border border-border">
-            <p className="text-lg md:text-xl text-foreground font-medium">
-              {getComparison()}
-            </p>
+            <p className="text-lg md:text-xl text-foreground font-medium">{getComparison()}</p>
           </div>
         </div>
       )}
