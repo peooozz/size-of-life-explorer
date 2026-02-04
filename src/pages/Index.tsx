@@ -21,26 +21,6 @@ const Index = () => {
       {/* Main bordered frame */}
       <div className="absolute inset-4 md:inset-8 lg:inset-12 border border-foreground/20 pointer-events-none" />
 
-      {/* Decorative stickers */}
-      {/* Top left - Hummingbird */}
-      <div className="absolute top-12 left-12 md:top-20 md:left-24 lg:top-24 lg:left-32 z-10">
-        <img
-          src={hummingbirdImg}
-          alt="Hummingbird"
-          className="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 object-contain sticker-shadow animate-float"
-          style={{ animationDelay: "0s" }}
-        />
-      </div>
-
-      {/* Top right - Sequoia/Vines */}
-      <div className="absolute -top-4 -right-4 md:top-0 md:right-0 z-10">
-        <img
-          src={sequoiaImg}
-          alt="Tree"
-          className="w-32 h-48 md:w-40 md:h-56 lg:w-48 lg:h-64 object-contain sticker-shadow opacity-90"
-        />
-      </div>
-
       {/* Main Content */}
       <div className="flex flex-col items-center min-h-screen px-4 py-16 relative z-20">
         {/* Hero Section */}
