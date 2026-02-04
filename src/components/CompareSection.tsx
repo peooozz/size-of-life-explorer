@@ -34,7 +34,7 @@ const CompareSection = () => {
             <SelectTrigger className="w-full max-w-xs bg-card border-border">
               <SelectValue placeholder="Select first item" />
             </SelectTrigger>
-            <SelectContent className="max-h-[300px]">
+            <SelectContent className="max-h-[150px]">
               {organisms.map((org) => (
                 <SelectItem key={org.id} value={org.id}>
                   {org.name} ({org.sizeLabel})
@@ -45,7 +45,7 @@ const CompareSection = () => {
 
           {leftOrganism && (
             <div className="flex flex-col items-center gap-3 animate-fade-in">
-              <div className="w-40 h-40 md:w-30 md:h-52 flex items-center justify-center">
+              <div className="w-40 h-40 md:w-52 md:h-52 flex items-center justify-center">
                 <img
                   src={leftOrganism.image}
                   alt={leftOrganism.name}
