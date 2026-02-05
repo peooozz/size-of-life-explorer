@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,88 +6,83 @@
 
 @layer base {
   :root {
-    --background: 40 30% 94%;
-    --foreground: 30 10% 15%;
+    --background: 220 20% 97%;
+    --foreground: 220 15% 15%;
 
-    --card: 40 25% 92%;
-    --card-foreground: 30 10% 15%;
+    --card: 220 15% 95%;
+    --card-foreground: 220 15% 15%;
 
-    --popover: 40 25% 92%;
-    --popover-foreground: 30 10% 15%;
+    --popover: 220 15% 95%;
+    --popover-foreground: 220 15% 15%;
 
-    --primary: 25 60% 45%;
-    --primary-foreground: 40 30% 96%;
+    --primary: 250 70% 60%;
+    --primary-foreground: 220 20% 98%;
 
-    --secondary: 40 20% 88%;
-    --secondary-foreground: 30 10% 15%;
+    --secondary: 220 15% 90%;
+    --secondary-foreground: 220 15% 15%;
 
-    --muted: 40 15% 90%;
-    --muted-foreground: 30 8% 45%;
+    --muted: 220 10% 92%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 15 70% 50%;
-    --accent-foreground: 40 30% 96%;
+    --accent: 200 80% 50%;
+    --accent-foreground: 220 20% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 15% 75%;
-    --input: 30 15% 75%;
-    --ring: 25 60% 45%;
+    --border: 220 15% 85%;
+    --input: 220 15% 85%;
+    --ring: 250 70% 60%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --cream: 40 30% 94%;
-    --cream-dark: 40 25% 88%;
-    --warm-brown: 25 40% 30%;
-    --terracotta: 15 60% 50%;
-
-    --sidebar-background: 40 30% 94%;
-    --sidebar-foreground: 30 10% 15%;
-    --sidebar-primary: 25 60% 45%;
-    --sidebar-primary-foreground: 40 30% 96%;
-    --sidebar-accent: 40 20% 88%;
-    --sidebar-accent-foreground: 30 10% 15%;
-    --sidebar-border: 30 15% 75%;
-    --sidebar-ring: 25 60% 45%;
+    --sidebar-background: 220 20% 97%;
+    --sidebar-foreground: 220 15% 15%;
+    --sidebar-primary: 250 70% 60%;
+    --sidebar-primary-foreground: 220 20% 98%;
+    --sidebar-accent: 220 15% 90%;
+    --sidebar-accent-foreground: 220 15% 15%;
+    --sidebar-border: 220 15% 85%;
+    --sidebar-ring: 250 70% 60%;
   }
 
   .dark {
-    --background: 30 15% 10%;
-    --foreground: 40 20% 90%;
+    --background: 220 20% 8%;
+    --foreground: 220 15% 92%;
 
-    --card: 30 15% 15%;
-    --card-foreground: 40 20% 90%;
+    --card: 220 18% 12%;
+    --card-foreground: 220 15% 92%;
 
-    --popover: 30 15% 15%;
-    --popover-foreground: 40 20% 90%;
+    --popover: 220 18% 12%;
+    --popover-foreground: 220 15% 92%;
 
-    --primary: 25 60% 55%;
-    --primary-foreground: 30 15% 10%;
+    --primary: 250 70% 65%;
+    --primary-foreground: 220 20% 8%;
 
-    --secondary: 30 15% 20%;
-    --secondary-foreground: 40 20% 90%;
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 220 15% 92%;
 
-    --muted: 30 15% 20%;
-    --muted-foreground: 40 15% 60%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 15 70% 55%;
-    --accent-foreground: 30 15% 10%;
+    --accent: 200 80% 55%;
+    --accent-foreground: 220 20% 8%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 15% 25%;
-    --input: 30 15% 25%;
-    --ring: 25 60% 55%;
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 250 70% 65%;
 
-    --sidebar-background: 30 15% 10%;
-    --sidebar-foreground: 40 20% 90%;
-    --sidebar-primary: 25 60% 55%;
-    --sidebar-primary-foreground: 30 15% 10%;
-    --sidebar-accent: 30 15% 20%;
-    --sidebar-accent-foreground: 40 20% 90%;
-    --sidebar-border: 30 15% 25%;
-    --sidebar-ring: 25 60% 55%;
+    --sidebar-background: 220 20% 8%;
+    --sidebar-foreground: 220 15% 92%;
+    --sidebar-primary: 250 70% 65%;
+    --sidebar-primary-foreground: 220 20% 8%;
+    --sidebar-accent: 220 15% 18%;
+    --sidebar-accent-foreground: 220 15% 92%;
+    --sidebar-border: 220 15% 22%;
+    --sidebar-ring: 250 70% 65%;
   }
 }
 
@@ -98,31 +93,12 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Source Sans 3', sans-serif;
+    font-family: 'Inter', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Space Grotesk', sans-serif;
   }
-}
-
-/* Decorative DNA-like divider */
-.dna-divider {
-  width: 200px;
-  height: 20px;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 8px,
-    hsl(var(--terracotta)) 8px,
-    hsl(var(--terracotta)) 10px
-  );
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cpath d='M0 10 Q25 0 50 10 T100 10 T150 10 T200 10' stroke='black' stroke-width='3' fill='none'/%3E%3Cpath d='M0 10 Q25 20 50 10 T100 10 T150 10 T200 10' stroke='black' stroke-width='3' fill='none'/%3E%3C/svg%3E");
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cpath d='M0 10 Q25 0 50 10 T100 10 T150 10 T200 10' stroke='black' stroke-width='3' fill='none'/%3E%3Cpath d='M0 10 Q25 20 50 10 T100 10 T150 10 T200 10' stroke='black' stroke-width='3' fill='none'/%3E%3C/svg%3E");
-  mask-size: contain;
-  -webkit-mask-size: contain;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
 }
 
 /* Floating animation */
@@ -139,18 +115,28 @@
   animation: float 4s ease-in-out infinite;
 }
 
+/* Slow pulse animation */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
+}
+
 /* Subtle hover lift */
 .hover-lift {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .hover-lift:hover {
-  transform: translateY(-2px);
-}
-
-/* Sticker shadow effect */
-.sticker-shadow {
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Scale indicator line */
@@ -172,4 +158,9 @@
 
 .animate-fade-in {
   animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Smooth transition utility */
+.smooth-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }

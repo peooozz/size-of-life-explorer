@@ -1,13 +1,7 @@
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import OrganismViewer from "@/components/OrganismViewer";
 import CompareSection from "@/components/CompareSection";
-
-// Import sticker images
-import catImg from "@/assets/organisms/cat.png";
-import hummingbirdImg from "@/assets/organisms/hummingbird.png";
-import sequoiaImg from "@/assets/organisms/sequoia.png";
-import ladybugImg from "@/assets/organisms/ladybug.png";
 
 const Index = () => {
   const [showViewer, setShowViewer] = useState(false);
@@ -18,6 +12,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5 animate-pulse-slow" />
+      
       {/* Main bordered frame */}
       <div className="absolute inset-4 md:inset-8 lg:inset-12 border border-foreground/20 pointer-events-none" />
 
@@ -26,6 +23,11 @@ const Index = () => {
         {/* Hero Section */}
         <div className="flex-1 flex items-center justify-center">
           <div className="text-center max-w-xl mx-auto">
+            {/* Sparkle icon */}
+            <div className="flex justify-center mb-4">
+              <Sparkles className="w-8 h-8 text-primary animate-pulse" />
+            </div>
+            
             {/* Title */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium mb-4 text-foreground tracking-tight">
               Size of Everything
@@ -57,14 +59,21 @@ const Index = () => {
             </div>
 
             {/* Subtitle */}
-            <p className="text-muted-foreground mb-8 text-lg">From the Planck length to the Observable Universe</p>
+            <p className="text-muted-foreground mb-8 text-lg">
+              From the Planck length to the Observable Universe
+            </p>
+            
+            {/* Size range indicator */}
+            <p className="text-sm text-muted-foreground/70 mb-8">
+              10⁻³⁵ m → 10²⁶ m
+            </p>
 
             {/* Enter Button */}
             <button
               onClick={() => setShowViewer(true)}
-              className="group inline-flex items-center gap-3 px-8 py-3 border-2 border-foreground/30 rounded-full hover:border-foreground/50 hover:bg-foreground/5 transition-all duration-300 text-lg font-medium text-foreground hover-lift"
+              className="group inline-flex items-center gap-3 px-8 py-3 border-2 border-foreground/30 rounded-full hover:border-primary hover:bg-primary/10 transition-all duration-300 text-lg font-medium text-foreground hover-lift"
             >
-              Enter
+              Explore the Scale
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
             </button>
           </div>
