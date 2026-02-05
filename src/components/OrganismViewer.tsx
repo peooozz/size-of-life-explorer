@@ -152,7 +152,7 @@ const OrganismViewer = ({ onExit }: OrganismViewerProps) => {
             isTransitioning && "opacity-0"
           )}
         >
-          <div className="text-center max-w-lg mx-auto">
+          <div className="text-center max-w-2xl mx-auto">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-1 text-foreground">
               {currentOrganism.name}
             </h2>
@@ -163,17 +163,27 @@ const OrganismViewer = ({ onExit }: OrganismViewerProps) => {
               </p>
             )}
 
-            {/* Size indicator */}
+            {/* Size and category indicators */}
             <div className="flex items-center justify-center gap-3 mb-3">
-              <div className="h-px w-12 bg-foreground/20" />
+              <span className="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full">
+                {currentOrganism.category}
+              </span>
+              <div className="h-px w-8 bg-foreground/20" />
               <span className="text-sm font-medium text-foreground/70">
                 {currentOrganism.sizeLabel}
               </span>
-              <div className="h-px w-12 bg-foreground/20" />
+              <div className="h-px w-8 bg-foreground/20" />
+              <span className="px-3 py-1 text-xs font-medium bg-accent/10 text-accent-foreground rounded-full capitalize">
+                {currentOrganism.type}
+              </span>
             </div>
 
-            <p className="text-foreground/70 leading-relaxed text-sm md:text-base">
+            <p className="text-foreground/70 leading-relaxed text-sm md:text-base mb-2">
               {currentOrganism.description}
+            </p>
+            
+            <p className="text-xs text-muted-foreground italic">
+              💡 {currentOrganism.funFact}
             </p>
           </div>
         </div>
